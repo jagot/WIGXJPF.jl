@@ -1,5 +1,66 @@
 module WIGXJPF
 
-# package code goes here
+include("../deps/deps.jl")
+
+function __init__()
+    max_two_j = 1000
+    ccall((:wig_table_init, _jl_libwigxjpf),
+          Void,
+          (Cint, Cint),
+          max_two_j, 9)
+    ccall((:wig_temp_init, _jl_libwigxjpf),
+          Void,
+          (Cint,),
+          max_two_j)
+end
+
+function wig3jj(j12::Integer, j22::Integer, j32::Integer,
+                m12::Integer, m22::Integer, m32::Integer)
+    ccall((:wig3jj, _jl_libwigxjpf),
+          Cdouble,
+          (Cint, Cint, Cint,
+           Cint, Cint, Cint),
+          j12, j22, j32,
+          m12, m22, m32)
+end
+
+wig3j(j1, j2, j3,
+      m1, m2, m3) = wig3jj(2j1, 2j2, 2j3,
+                           2m1, 2m2, 2m3)
+
+function wig6jj(j12::Integer, j22::Integer, j32::Integer,
+                j42::Integer, j52::Integer, j62::Integer)
+    ccall((:wig6jj, _jl_libwigxjpf),
+          Cdouble,
+          (Cint, Cint, Cint,
+           Cint, Cint, Cint),
+          j12, j22, j32,
+          j42, j52, j62)
+end
+
+wig6j(j1, j2, j3,
+      j4, j5, j6) = wig6jj(2j1, 2j2, 2j3,
+                           2j4, 2j5, 2j6)
+
+function wig9j(j12::Integer, j22::Integer, j32::Integer,
+               j42::Integer, j52::Integer, j62::Integer,
+               j72::Integer, j82::Integer, j92::Integer)
+    ccall((:wig9jj, _jl_libwigxjpf),
+          Cdouble,
+          (Cint, Cint, Cint,
+           Cint, Cint, Cint,
+           Cint, Cint, Cint),
+          j12, j22, j32,
+          j42, j52, j62,
+          j72, j82, j92)
+end
+
+wig9j(j1, j2, j3,
+      j4, j5, j6,
+      j7, j8, j9) = wig9jj(2j1, 2j2, 2j3,
+                           2j4, 2j5, 2j6,
+                           2j7, 2j8, 2j9)
+
+export wig3jj, wig3j, wig6jj, wig6j, wig9jj, wig9j
 
 end # module
