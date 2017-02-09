@@ -3,5 +3,6 @@
 *.jl.mem
 *~
 .juliahistory
+deps/deps.jl
 deps/builds/
 deps/usr/
