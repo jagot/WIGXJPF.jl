@@ -14,6 +14,9 @@ function __init__()
           max_two_j)
 end
 
+doubled(i::Integer) = 2i
+doubled(r::Rational) = Int(2r)
+
 function wig3jj(j12::Integer, j22::Integer, j32::Integer,
                 m12::Integer, m22::Integer, m32::Integer)
     ccall((:wig3jj, _jl_libwigxjpf),
@@ -25,8 +28,8 @@ function wig3jj(j12::Integer, j22::Integer, j32::Integer,
 end
 
 wig3j(j1, j2, j3,
-      m1, m2, m3) = wig3jj(2j1, 2j2, 2j3,
-                           2m1, 2m2, 2m3)
+      m1, m2, m3) = wig3jj(doubled(j1), doubled(j2), doubled(j3),
+                           doubled(m1), doubled(m2), doubled(m3))
 
 function wig6jj(j12::Integer, j22::Integer, j32::Integer,
                 j42::Integer, j52::Integer, j62::Integer)
@@ -39,8 +42,8 @@ function wig6jj(j12::Integer, j22::Integer, j32::Integer,
 end
 
 wig6j(j1, j2, j3,
-      j4, j5, j6) = wig6jj(2j1, 2j2, 2j3,
-                           2j4, 2j5, 2j6)
+      j4, j5, j6) = wig6jj(doubled(j1), doubled(j2), doubled(j3),
+                           doubled(j4), doubled(j5), doubled(j6))
 
 function wig9j(j12::Integer, j22::Integer, j32::Integer,
                j42::Integer, j52::Integer, j62::Integer,
@@ -57,9 +60,9 @@ end
 
 wig9j(j1, j2, j3,
       j4, j5, j6,
-      j7, j8, j9) = wig9jj(2j1, 2j2, 2j3,
-                           2j4, 2j5, 2j6,
-                           2j7, 2j8, 2j9)
+      j7, j8, j9) = wig9jj(doubled(j1), doubled(j2), doubled(j3),
+                           doubled(j4), doubled(j5), doubled(j6),
+                           doubled(j7), doubled(j8), doubled(j9))
 
 export wig3jj, wig3j, wig6jj, wig6j, wig9jj, wig9j
 
