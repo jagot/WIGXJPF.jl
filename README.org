@@ -1,0 +1,40 @@
+#+TITLE: WIGXJPF
+
+[[https://travis-ci.org/jagot/WIGXJPF.jl][https://travis-ci.org/jagot/WIGXJPF.jl.svg?branch=master]]
+
+Julia wrapper for the [[http://fy.chalmers.se/subatom/wigxjpf/][WIGXJPF]] library used to calculate Wigner 3j, 6j
+and 9j symbols. Since the original library is release under the [[https://www.gnu.org/licenses/gpl-3.0.en.html][GPLv3]]
+license, so is this Julia wrapper.
+
+* Example usage
+  The original library expects all arguments to multiplied by two. For
+  instance, to calculate the 3j symbol (1 1 0; 0 0 0) = -1/√3, one
+  would say
+  #+BEGIN_SRC julia :exports both :session *julia*
+    using WIGXJPF
+
+    wig3jj(2, 2, 0,
+           0, 0, 0)
+  #+END_SRC
+
+  #+RESULTS:
+  : -0.5773502691896258
+
+  This Julia library also provides a wrapper which performs the
+  multiplication by two under the hood:
+  #+BEGIN_SRC julia :exports both :session *julia*
+    wig3j(1, 1, 0,
+          0, 0, 0)
+  #+END_SRC
+
+  #+RESULTS:
+  : -0.5773502691896258
+
+  It also works for rational arguments:
+  #+BEGIN_SRC julia :exports both :session *julia*
+    wig3j(1//2,  1//2, 0,
+          1//2, -1//2, 0)
+  #+END_SRC
+
+  #+RESULTS:
+  : 0.7071067811865475
