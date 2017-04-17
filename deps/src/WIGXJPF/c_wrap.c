@@ -33,7 +33,8 @@ void wig_table_init(int max_two_j, int wigner_type)
   int max_factorial;
 
   if (max_two_j < 0) {
-    fprintf (stderr, "Negative max_two_j in wig_table_init.  Abort.\n");
+    fprintf (stderr,
+	     "wigxjpf: Negative max_two_j in wig_table_init.  Abort.\n");
     exit(1);
   }
 
@@ -44,7 +45,8 @@ void wig_table_init(int max_two_j, int wigner_type)
     case 6: max_factorial = (4 * max_two_j) / 2 + 1; break;
     case 9: max_factorial = (5 * max_two_j) / 2 + 1; break;
     default:
-      fprintf (stderr, "Bad wigner_type (%d) in wig_table_init.  Abort.\n",
+      fprintf (stderr,
+	       "wigxjpf: Bad wigner_type (%d) in wig_table_init.  Abort.\n",
 	       wigner_type);
       exit(1);
     }
@@ -62,7 +64,7 @@ void wig_temp_init(int max_two_j)
   int max_iter = (max_two_j / 2) + 1;
   
   if (max_two_j < 0) {
-    fprintf (stderr, "Negative max_two_j in wig_temp_init.  Abort.\n");
+    fprintf (stderr, "wigxjpf: Negative max_two_j in wig_temp_init.  Abort.\n");
     exit(1);
   }
 

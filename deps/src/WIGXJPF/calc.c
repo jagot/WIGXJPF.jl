@@ -69,9 +69,19 @@ void print_max_factiter(int lim)
 #define CHECK_TEMP do {						\
     if (csi == NULL) {						\
       fprintf (stderr, "wigxjpf: "				\
-	       "Temp array not allocated.  Abort.\n");	        \
+	       "Temp array not allocated.  (For this thread?)"	\
+	       "Abort.\n");					\
       exit(1);							\
     }							        \
+    if (csi->inuse) {						\
+      fprintf (stderr, "wigxjpf: "				\
+	       "Temp array already in use.  "			\
+	       "Running multi-threaded, "			\
+	       "but wigxjpf not compiled for that?  "		\
+	       "Abort.\n");					\
+      exit(1);							\
+    }								\
+    csi->inuse = 1;						\
   } while (0)
 
 #define CHECK_MAX_ITER(iter) do {			        \
@@ -649,7 +659,7 @@ struct wigxjpf_temp *wigxjpf_temp_alloc(int max_iter)
   if (temp == NULL)
     {
       fprintf (stderr,
-	       "Memory allocation error (wigxjpf_temp), %zd bytes.",
+	       "wigxjpf: Memory allocation error (wigxjpf_temp), %zd bytes.",
 	       total_size);
       exit(1);
     }
@@ -685,6 +695,8 @@ struct wigxjpf_temp *wigxjpf_temp_alloc(int max_iter)
       mwi_alloc(&temp->pexpo_eval.big_up[i]);
     }
 
+  temp->inuse = 0;
+
   return temp;
 }
 
@@ -692,6 +704,13 @@ void wigxjpf_temp_free(struct wigxjpf_temp *temp)
 {
   if (temp == NULL)
     return;
+
+  if (temp->inuse)
+    {
+      fprintf (stderr,
+	       "wigxjpf: Freeing temp array while still in use.  Abort.");
+      exit(1);
+    }
 
   mwi_free(&temp->sum_prod);
 

@@ -72,6 +72,8 @@ struct wigxjpf_temp
 
   struct pexpo_eval_temp pexpo_eval;
 
+  int inuse;
+
   int max_iter;
   size_t size;
 

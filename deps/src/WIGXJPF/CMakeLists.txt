@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_C_FLAGS "-Wall -Wextra -O3 -Wconversion -Wcast-qual")
+set(CMAKE_MACOSX_RPATH 1)
 
 set(quadmath_src 
   calc_float128.c

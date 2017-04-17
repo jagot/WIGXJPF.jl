@@ -101,6 +101,8 @@ void DBL_FCN_POSTFIX(calc_3j)(DOUBLE_TYPE *result,
 	     two_m1, two_m2, two_m3);
 
   DBL_FCN_POSTFIX(eval_calcsum_info)(result, temp);
+
+  temp->inuse = 0;
 }
 
 void DBL_FCN_POSTFIX(calc_6j)(DOUBLE_TYPE *result,
@@ -120,6 +122,8 @@ void DBL_FCN_POSTFIX(calc_6j)(DOUBLE_TYPE *result,
 	     two_j4, two_j5, two_j6);
 
   DBL_FCN_POSTFIX(eval_calcsum_info)(result, temp);
+
+  temp->inuse = 0;
 }
 
 void DBL_FCN_POSTFIX(calc_9j)(DOUBLE_TYPE *result,
@@ -141,4 +145,6 @@ void DBL_FCN_POSTFIX(calc_9j)(DOUBLE_TYPE *result,
 	     two_j7, two_j8, two_j9);
 
   DBL_FCN_POSTFIX(eval_calcsum_info)(result, temp);
+
+  temp->inuse = 0;
 }
