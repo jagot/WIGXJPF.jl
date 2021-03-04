@@ -1,5 +1,7 @@
 #+TITLE: WIGXJPF
 
+*DEPRECATED* in favour of https://github.com/Jutho/WignerSymbols.jl
+
 [[https://travis-ci.org/jagot/WIGXJPF.jl][https://travis-ci.org/jagot/WIGXJPF.jl.svg?branch=master]]
 
 Julia wrapper for the [[http://fy.chalmers.se/subatom/wigxjpf/][WIGXJPF]] library used to calculate Wigner 3j, 6j
